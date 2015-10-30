@@ -17,16 +17,14 @@ namespace AutoReservation.Dal
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Auto()
         {
-            this.Reservation = new HashSet<Reservation>();
+            this.Reservations = new HashSet<Reservation>();
         }
     
         public int Id { get; set; }
         public string Marke { get; set; }
-        public int AutoKlasse { get; set; }
         public int Tagestarif { get; set; }
-        public Nullable<int> Basistarif { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservation> Reservation { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }
