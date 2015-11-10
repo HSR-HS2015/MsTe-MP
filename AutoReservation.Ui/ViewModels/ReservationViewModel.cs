@@ -115,15 +115,15 @@ namespace AutoReservation.Ui.ViewModels
             Kunden.Clear();
             Autos.Clear();
 
-            foreach (KundeDto kunde in Service.Kunden)
+            foreach (KundeDto kunde in Service.Kunden())
             {
                 Kunden.Add(kunde);
             }
-            foreach (AutoDto auto in Service.Autos)
+            foreach (AutoDto auto in Service.Autos())
             {
                 Autos.Add(auto);
             }
-            foreach (ReservationDto reservation in Service.Reservationen)
+            foreach (ReservationDto reservation in Service.Reservationen())
             {
                 Reservationen.Add(reservation);
                 reservationenOriginal.Add((ReservationDto)reservation.Clone());

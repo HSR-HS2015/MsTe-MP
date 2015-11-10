@@ -7,6 +7,14 @@ namespace AutoReservation.Common.Interfaces
     [ServiceContract]
     public interface IAutoReservationService
     {
+        /*
+
+            Kunde
+
+        */
+
+        [OperationContract]
+        IList<KundeDto> Kunden();
 
         [OperationContract]
         IList<KundeDto> GetKunden();
@@ -23,7 +31,14 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         void DeleteKunde(KundeDto kunde);
 
+        /*
 
+            Autos
+
+        */
+
+        [OperationContract]
+        IList<AutoDto> Autos();
 
         [OperationContract]
         IList<AutoDto> GetAutos();
@@ -40,7 +55,14 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         void DeleteAuto(AutoDto auto);
 
+        /*
 
+            Reservations
+        
+        */
+
+        [OperationContract]
+        IList<ReservationDto> Reservationen();
 
         [OperationContract]
         IList<ReservationDto> GetReservations();
