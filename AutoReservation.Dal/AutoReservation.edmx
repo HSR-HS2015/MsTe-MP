@@ -139,16 +139,16 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AutoReservationEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Auto" EntityType="Self.Auto" />
-          <EntitySet Name="Kunde" EntityType="Self.Kunde" />
-          <EntitySet Name="Reservation" EntityType="Self.Reservation" />
+          <EntitySet Name="Autos" EntityType="Self.Auto" />
+          <EntitySet Name="Kunden" EntityType="Self.Kunde" />
+          <EntitySet Name="Reservationen" EntityType="Self.Reservation" />
           <AssociationSet Name="FK_Reservation_Auto" Association="Self.FK_Reservation_Auto">
-            <End Role="Auto" EntitySet="Auto" />
-            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Auto" EntitySet="Autos" />
+            <End Role="Reservation" EntitySet="Reservationen" />
           </AssociationSet>
           <AssociationSet Name="FK_Reservation_Kunde" Association="Self.FK_Reservation_Kunde">
-            <End Role="Kunde" EntitySet="Kunde" />
-            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Kunde" EntitySet="Kunden" />
+            <End Role="Reservation" EntitySet="Reservationen" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="LuxusklasseAuto" BaseType="AutoReservationModel.Auto">
@@ -162,7 +162,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AutoReservationModelStoreContainer" CdmEntityContainer="AutoReservationEntities">
-          <EntitySetMapping Name="Auto">
+          <EntitySetMapping Name="Autos">
             <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.LuxusklasseAuto)">
               <MappingFragment StoreEntitySet="Auto">
                 <ScalarProperty Name="Marke" ColumnName="Marke" />
@@ -197,7 +197,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Kunde">
+          <EntitySetMapping Name="Kunden">
             <EntityTypeMapping TypeName="AutoReservationModel.Kunde">
               <MappingFragment StoreEntitySet="Kunde">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -207,7 +207,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Reservation">
+          <EntitySetMapping Name="Reservationen">
             <EntityTypeMapping TypeName="AutoReservationModel.Reservation">
               <MappingFragment StoreEntitySet="Reservation">
                 <ScalarProperty Name="ReservationNr" ColumnName="Id" />

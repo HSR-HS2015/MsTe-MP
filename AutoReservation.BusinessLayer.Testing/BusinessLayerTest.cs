@@ -1,5 +1,8 @@
 ﻿using AutoReservation.TestEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AutoReservation.Dal;
+using System.Data.Entity.Core.Objects;
+using System;
 
 namespace AutoReservation.BusinessLayer.Testing
 {
@@ -29,19 +32,35 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void Test_UpdateAuto()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Auto modified = target.getAuto(1);
+            modified.Marke = "Suzuki";
+            modified.Tagestarif = 200;
+            target.updateAuto(target.getAuto(1), modified);
+
+            Assert.AreEqual("Suzuki", target.getAuto(1).Marke);
+            Assert.AreEqual(200, target.getAuto(1).Tagestarif);
         }
 
         [TestMethod]
         public void Test_UpdateKunde()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Kunde modified = target.getKunde(1);
+            modified.Nachname = "Müller";
+            modified.Vorname = "Josef";
+            target.updateKunde(target.getKunde(1), modified);
+            Assert.AreEqual("Müller", target.getKunde(1).Nachname);
+            Assert.AreEqual("Josef", target.getKunde(1).Vorname);
         }
 
         [TestMethod]
         public void Test_UpdateReservation()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Reservation modified = Target.getReservation(1);
+            DateTime newDate = DateTime.Now;
+            modified.Von = newDate;
+            modified.Bis = newDate.AddHours(1);
+            Target.updateReservation(Target.getReservation(1), modified);
+            Assert.IsTrue(newDate.ToString("MM/dd/yy H:mm:ss").Equals(Target.getReservation(1).Von.ToString("MM/dd/yy H:mm:ss")));
         }
     }
 }
