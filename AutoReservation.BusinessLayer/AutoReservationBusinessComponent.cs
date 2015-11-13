@@ -21,12 +21,12 @@ namespace AutoReservation.BusinessLayer
 
         public IList<Auto> getAutos()
         {
-            return context.Autos.ToList();
+            return context.Autos.AsNoTracking().ToList();
         }
 
         public Auto getAuto(int id)
         {
-            return context.Autos.SingleOrDefault(a => a.Id == id);
+            return context.Autos.AsNoTracking().SingleOrDefault(a => a.Id == id);
         }
 
         public void updateAuto(Auto original, Auto modified)
@@ -68,12 +68,12 @@ namespace AutoReservation.BusinessLayer
 
         public IList<Kunde> getKunden()
         {
-            return context.Kunden.ToList();
+            return context.Kunden.AsNoTracking().ToList();
         }
 
         public Kunde getKunde(int id)
         {
-            return context.Kunden.SingleOrDefault(a => a.Id == id);
+            return context.Kunden.AsNoTracking().SingleOrDefault(a => a.Id == id);
         }
 
         public void updateKunde(Kunde original, Kunde modified)
@@ -115,12 +115,12 @@ namespace AutoReservation.BusinessLayer
 
         public IList<Reservation> getReservationen()
         {
-            return context.Reservationen.ToList();
+            return context.Reservationen.AsNoTracking().ToList();
         }
 
         public Reservation getReservation(int ResNr)
         {
-            return context.Reservationen.SingleOrDefault(a => a.ReservationNr == ResNr);
+            return context.Reservationen.AsNoTracking().SingleOrDefault(a => a.ReservationNr == ResNr);
         }
 
         public void updateReservation(Reservation original, Reservation modified)

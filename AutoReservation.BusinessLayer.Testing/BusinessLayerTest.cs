@@ -32,24 +32,24 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void Test_UpdateAuto()
         {
-            Auto modified = target.getAuto(1);
+            Auto modified = Target.getAuto(1);
             modified.Marke = "Suzuki";
             modified.Tagestarif = 200;
-            target.updateAuto(target.getAuto(1), modified);
+            Target.updateAuto(Target.getAuto(1), modified);
 
-            Assert.AreEqual("Suzuki", target.getAuto(1).Marke);
-            Assert.AreEqual(200, target.getAuto(1).Tagestarif);
+            Assert.AreEqual("Suzuki", Target.getAuto(1).Marke);
+            Assert.AreEqual(200, Target.getAuto(1).Tagestarif);
         }
 
         [TestMethod]
         public void Test_UpdateKunde()
         {
-            Kunde modified = target.getKunde(1);
+            Kunde modified = Target.getKunde(1);
             modified.Nachname = "Müller";
             modified.Vorname = "Josef";
-            target.updateKunde(target.getKunde(1), modified);
-            Assert.AreEqual("Müller", target.getKunde(1).Nachname);
-            Assert.AreEqual("Josef", target.getKunde(1).Vorname);
+            Target.updateKunde(Target.getKunde(1), modified);
+            Assert.AreEqual("Müller", Target.getKunde(1).Nachname);
+            Assert.AreEqual("Josef", Target.getKunde(1).Vorname);
         }
 
         [TestMethod]
