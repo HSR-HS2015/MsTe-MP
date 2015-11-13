@@ -19,17 +19,17 @@ namespace AutoReservation.BusinessLayer
             Autos
         */
 
-        public IList<Auto> getAutos()
+        public IList<Auto> GetAutos()
         {
             return context.Autos.AsNoTracking().ToList();
         }
 
-        public Auto getAuto(int id)
+        public Auto GetAuto(int id)
         {
             return context.Autos.AsNoTracking().SingleOrDefault(a => a.Id == id);
         }
 
-        public void updateAuto(Auto original, Auto modified)
+        public void UupdateAuto(Auto original, Auto modified)
         {
             context.Autos.Attach(original);
             context.Entry(original).CurrentValues.SetValues(modified);
@@ -46,7 +46,7 @@ namespace AutoReservation.BusinessLayer
 
         }
 
-        public void deleteAuto(Auto auto)
+        public void DeleteAuto(Auto auto)
         {
             context.Autos.Attach(auto);
             context.Autos.Remove(auto);
@@ -54,7 +54,7 @@ namespace AutoReservation.BusinessLayer
             context.Entry(auto).State = EntityState.Detached;
         }
 
-        public void addAuto(Auto auto)
+        public void AddAuto(Auto auto)
         {
             context.Autos.Add(auto);
             context.SaveChanges();
@@ -66,17 +66,17 @@ namespace AutoReservation.BusinessLayer
             Kunde
         */
 
-        public IList<Kunde> getKunden()
+        public IList<Kunde> GetKunden()
         {
             return context.Kunden.AsNoTracking().ToList();
         }
 
-        public Kunde getKunde(int id)
+        public Kunde GetKunde(int id)
         {
             return context.Kunden.AsNoTracking().SingleOrDefault(a => a.Id == id);
         }
 
-        public void updateKunde(Kunde original, Kunde modified)
+        public void UpdateKunde(Kunde original, Kunde modified)
         {
             context.Kunden.Attach(original);
             context.Entry(original).CurrentValues.SetValues(modified);
@@ -93,7 +93,7 @@ namespace AutoReservation.BusinessLayer
 
         }
 
-        public void deleteKunde(Kunde kunde)
+        public void DeleteKunde(Kunde kunde)
         {
             context.Kunden.Attach(kunde);
             context.Kunden.Remove(kunde);
@@ -101,7 +101,7 @@ namespace AutoReservation.BusinessLayer
             context.Entry(kunde).State = EntityState.Detached;
         }
 
-        public void addKunde(Kunde kunde)
+        public void AddKunde(Kunde kunde)
         {
             context.Kunden.Add(kunde);
             context.SaveChanges();
@@ -113,17 +113,17 @@ namespace AutoReservation.BusinessLayer
             Reservation
         */
 
-        public IList<Reservation> getReservationen()
+        public IList<Reservation> Reservationen()
         {
             return context.Reservationen.AsNoTracking().ToList();
         }
 
-        public Reservation getReservation(int ResNr)
+        public Reservation GetReservation(int ResNr)
         {
             return context.Reservationen.AsNoTracking().SingleOrDefault(a => a.ReservationNr == ResNr);
         }
 
-        public void updateReservation(Reservation original, Reservation modified)
+        public void UpdateReservation(Reservation original, Reservation modified)
         {
             context.Reservationen.Attach(original);
             context.Entry(original).CurrentValues.SetValues(modified);
@@ -140,7 +140,7 @@ namespace AutoReservation.BusinessLayer
 
         }
 
-        public void deleteReservation(Reservation reservation)
+        public void DeleteReservation(Reservation reservation)
         {
             context.Reservationen.Attach(reservation);
             context.Reservationen.Remove(reservation);
@@ -148,7 +148,7 @@ namespace AutoReservation.BusinessLayer
             context.Entry(reservation).State = EntityState.Detached;
         }
 
-        public void addReservation(Reservation reservation)
+        public void AddReservation(Reservation reservation)
         {
             context.Reservationen.Add(reservation);
             context.SaveChanges();

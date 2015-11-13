@@ -1,6 +1,7 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Common.Interfaces;
 using AutoReservation.TestEnvironment;
+using AutoReservation.Dal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -22,61 +23,107 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void Test_GetAutos()
         {
-            Assert.Inconclusive("Test not implemented.");
+            IList<AutoDto> autos = Target.Autos();
+            Assert.IsTrue(autos.Count >= 3);
         }
 
         [TestMethod]
         public void Test_GetKunden()
         {
-            Assert.Inconclusive("Test not implemented.");
+            IList<KundeDto> kunden = Target.Kunden();
+            Assert.IsTrue(kunden.Count >= 4);
         }
 
         [TestMethod]
         public void Test_GetReservationen()
         {
-            Assert.Inconclusive("Test not implemented.");
+            IList<ReservationDto> reservationen = Target.Reservationen();
+            Assert.IsTrue(reservationen.Count >= 3);
         }
 
         [TestMethod]
         public void Test_GetAutoById()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.AreEqual("Audi S6", Target.GetAuto(3).Marke);
         }
 
         [TestMethod]
         public void Test_GetKundeById()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.AreEqual("Zufall", Target.GetKunde(4).Nachname);
         }
 
         [TestMethod]
         public void Test_GetReservationByNr()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Console.WriteLine(Target.GetReservation(1)); //failed
         }
 
         [TestMethod]
         public void Test_GetReservationByIllegalNr()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.IsNull(Target.GetReservation(100));
         }
 
         [TestMethod]
         public void Test_InsertAuto()
         {
-            Assert.Inconclusive("Test not implemented.");
+            int newid = Target.Autos().Count + 1;
+            AutoDto auto = new AutoDto();
+            auto.Marke = "VW";
+            auto.Tagestarif = 9000;
+            auto.Basistarif = 300;
+            auto.AutoKlasse = AutoKlasse.Mittelklasse;
+            Target.InsertAuto(auto);
+
+            AutoDto inserted = Target.GetAuto(newid);
+
+            Assert.AreEqual("VW", inserted.Marke);
+            Assert.AreEqual(9000, inserted.Tagestarif);
+            Assert.AreEqual(300, inserted.Basistarif);
+            Assert.AreEqual(AutoKlasse.Mittelklasse, inserted.AutoKlasse);
         }
 
         [TestMethod]
         public void Test_InsertKunde()
         {
-            Assert.Inconclusive("Test not implemented.");
+            int newid = Target.Kunden().Count + 1;
+            KundeDto kunde = new KundeDto();
+            kunde.Vorname = "Hans";
+            kunde.Nachname = "Washeiri";
+            kunde.Geburtsdatum = new DateTime(2011, 11, 11);
+            Target.InsertKunde(kunde);
+
+            KundeDto inserted = Target.GetKunde(newid);
+
+            Assert.AreEqual("Hans", inserted.Vorname);
+            Assert.AreEqual("Washeiri", inserted.Nachname);
+            Assert.AreEqual(new DateTime(2011, 11, 11), inserted.Geburtsdatum);
         }
 
         [TestMethod]
         public void Test_InsertReservation()
         {
-            Assert.Inconclusive("Test not implemented.");
+            int newresid = Target.Reservationen().Count + 1;
+            int kundeid = Target.Kunden().Count;
+            int autoid = Target.Autos().Count;
+
+            ReservationDto res = new ReservationDto();
+            res.Kunde = Target.GetKunde(kundeid);
+            res.Auto = Target.GetAuto(autoid);
+            res.Von = new DateTime(2001, 10, 10);
+            res.Bis = new DateTime(2002, 10, 10);
+
+            Target.InsertReservation(res);
+
+            ReservationDto inserted = Target.GetReservation(newresid);
+            KundeDto kunde = Target.GetKunde(kundeid);
+            AutoDto auto = Target.GetAuto(autoid);
+
+            //Assert.AreSame(kunde, inserted.Kunde);
+            // Assert.AreEqual(auto, inserted.Auto);
+            Assert.AreEqual(new DateTime(2001, 10, 10), inserted.Von);
+
         }
 
         [TestMethod]
