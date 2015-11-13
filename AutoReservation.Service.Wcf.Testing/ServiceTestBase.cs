@@ -70,18 +70,18 @@ namespace AutoReservation.Service.Wcf.Testing
         {
             int newid = Target.Autos().Count + 1;
             AutoDto auto = new AutoDto();
-            auto.Marke = "VW";
+            auto.Marke = "VW Golf";
             auto.Tagestarif = 9000;
             auto.Basistarif = 300;
-            auto.AutoKlasse = AutoKlasse.Mittelklasse;
+            auto.AutoKlasse = AutoKlasse.Luxusklasse;
             Target.InsertAuto(auto);
 
             AutoDto inserted = Target.GetAuto(newid);
 
-            Assert.AreEqual("VW", inserted.Marke);
+            Assert.AreEqual("VW Golf", inserted.Marke);
             Assert.AreEqual(9000, inserted.Tagestarif);
             Assert.AreEqual(300, inserted.Basistarif);
-            Assert.AreEqual(AutoKlasse.Mittelklasse, inserted.AutoKlasse);
+            Assert.AreEqual(AutoKlasse.Luxusklasse, inserted.AutoKlasse);
         }
 
         [TestMethod]
