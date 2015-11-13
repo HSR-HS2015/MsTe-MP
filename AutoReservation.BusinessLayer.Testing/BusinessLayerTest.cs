@@ -35,7 +35,7 @@ namespace AutoReservation.BusinessLayer.Testing
             Auto modified = Target.GetAuto(1);
             modified.Marke = "Suzuki";
             modified.Tagestarif = 200;
-            Target.UupdateAuto(Target.GetAuto(1), modified);
+            Target.UpdateAuto(Target.GetAuto(1), modified);
 
             Assert.AreEqual("Suzuki", Target.GetAuto(1).Marke);
             Assert.AreEqual(200, Target.GetAuto(1).Tagestarif);
@@ -62,5 +62,6 @@ namespace AutoReservation.BusinessLayer.Testing
             Target.UpdateReservation(Target.GetReservation(1), modified);
             Assert.IsTrue(newDate.ToString("MM/dd/yy H:mm:ss").Equals(Target.GetReservation(1).Von.ToString("MM/dd/yy H:mm:ss")));
         }
+
     }
 }

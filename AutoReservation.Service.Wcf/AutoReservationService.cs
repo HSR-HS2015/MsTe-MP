@@ -43,7 +43,7 @@ namespace AutoReservation.Service.Wcf
         public void UpdateAuto(AutoDto original, AutoDto modified )
         {
             WriteActualMethod();
-            component.UupdateAuto(original.ConvertToEntity(), modified.ConvertToEntity());
+            component.UpdateAuto(original.ConvertToEntity(), modified.ConvertToEntity());
         }
 
         public void DeleteAuto(AutoDto auto)
@@ -87,7 +87,7 @@ namespace AutoReservation.Service.Wcf
         public IList<ReservationDto> Reservationen()
         {
             WriteActualMethod();
-            return component.Reservationen().ConvertToDtos();
+            return component.GetReservationen().ConvertToDtos();
         }
 
         public ReservationDto GetReservation(int id)

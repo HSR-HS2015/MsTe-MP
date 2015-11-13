@@ -36,7 +36,7 @@ namespace AutoReservation.Common.DataTransferObjects
             get { return von; }
             set
             {
-                if(!von.Equals(value))
+                if(von == null || !von.Equals(value))
                 {
                     von = value;
                     this.OnPropertyChanged(p => p.von);
@@ -50,7 +50,7 @@ namespace AutoReservation.Common.DataTransferObjects
             get { return bis; }
             set
             {
-                if(!bis.Equals(value))
+                if(bis == null || !bis.Equals(value))
                 {
                     bis = value;
                     this.OnPropertyChanged(p => p.bis);
@@ -64,7 +64,7 @@ namespace AutoReservation.Common.DataTransferObjects
             get { return auto; }
             set
             {
-                if(!auto.Equals(value))
+                if(auto == null || !auto.Equals(value))
                 {
                     auto = value;
                     this.OnPropertyChanged(p => p.auto);
@@ -78,7 +78,7 @@ namespace AutoReservation.Common.DataTransferObjects
             get { return kunde; }
             set
             {
-                if(!kunde.Equals(value))
+                if(kunde == null || !kunde.Equals(value))
                 {
                     kunde = value;
                     this.OnPropertyChanged(p => p.kunde);

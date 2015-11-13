@@ -38,7 +38,7 @@ namespace AutoReservation.Service.Wcf.Testing
         public void Test_GetReservationen()
         {
             IList<ReservationDto> reservationen = Target.Reservationen();
-            Assert.IsTrue(reservationen.Count >= 3);
+            Assert.IsTrue(reservationen.Count > 0);
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void Test_GetReservationByNr()
         {
-            Console.WriteLine(Target.GetReservation(1)); //failed
+            Assert.AreEqual(Target.GetAuto(3).ToString(),Target.GetReservation(3).Auto.ToString());
         }
 
         [TestMethod]
@@ -120,8 +120,8 @@ namespace AutoReservation.Service.Wcf.Testing
             KundeDto kunde = Target.GetKunde(kundeid);
             AutoDto auto = Target.GetAuto(autoid);
 
-            //Assert.AreSame(kunde, inserted.Kunde);
-            // Assert.AreEqual(auto, inserted.Auto);
+            Assert.AreEqual(kunde.ToString(), inserted.Kunde.ToString());
+            Assert.AreEqual(auto.ToString(), inserted.Auto.ToString());
             Assert.AreEqual(new DateTime(2001, 10, 10), inserted.Von);
 
         }
@@ -129,19 +129,50 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void Test_UpdateAuto()
         {
-            Assert.Inconclusive("Test not implemented.");
+            AutoDto auto = Target.GetAuto(2);
+
+            auto.Marke = "Ferrari";
+            auto.Tagestarif = 400;
+
+            Target.UpdateAuto(Target.GetAuto(2), auto);
+            Assert.AreEqual("Ferrari", Target.GetAuto(2).Marke);
+            Assert.AreEqual(400, Target.GetAuto(2).Tagestarif);
         }
 
         [TestMethod]
         public void Test_UpdateKunde()
         {
-            Assert.Inconclusive("Test not implemented.");
+            KundeDto kunde = Target.GetKunde(3);
+
+            kunde.Vorname = "Jesus";
+            kunde.Nachname = "Christus";
+            kunde.Geburtsdatum = new DateTime(1900, 12, 24);
+
+            Target.UpdateKunde(Target.GetKunde(3), kunde);
+
+            Assert.AreEqual("Jesus", Target.GetKunde(3).Vorname);
+            Assert.AreEqual("Christus", Target.GetKunde(3).Nachname);
+            Assert.AreEqual(new DateTime(1900, 12, 24), Target.GetKunde(3).Geburtsdatum);
         }
 
         [TestMethod]
         public void Test_UpdateReservation()
         {
-            Assert.Inconclusive("Test not implemented.");
+            ReservationDto res = Target.GetReservation(2);
+            int kundeid = Target.Kunden().Count;
+            int autoid = Target.Autos().Count;
+
+            res.Kunde = Target.GetKunde(kundeid);
+            res.Auto = Target.GetAuto(autoid);
+            res.Von = new DateTime(1990, 12, 23);
+            res.Bis = new DateTime(2100, 10, 23);
+
+            Target.UpdateReservation(Target.GetReservation(2), res);
+
+            Assert.AreEqual(Target.GetKunde(kundeid).ToString(), Target.GetReservation(2).Kunde.ToString());
+            Assert.AreEqual(Target.GetAuto(autoid).ToString(), Target.GetReservation(2).Auto.ToString());
+            Assert.AreEqual(new DateTime(1990, 12, 23), Target.GetReservation(2).Von);
+            Assert.AreEqual(new DateTime(2100, 10, 23), Target.GetReservation(2).Bis);
         }
 
         [TestMethod]
@@ -168,19 +199,28 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void Test_DeleteKunde()
         {
-            Assert.Inconclusive("Test not implemented.");
+            KundeDto kunde = Target.GetKunde(1);
+            Target.DeleteKunde(kunde);
+
+            Assert.IsNull(Target.GetKunde(1));
         }
 
         [TestMethod]
         public void Test_DeleteAuto()
         {
-            Assert.Inconclusive("Test not implemented.");
+            AutoDto auto = Target.GetAuto(1);
+            Target.DeleteAuto(auto);
+
+            Assert.IsNull(Target.GetAuto(1));
         }
 
         [TestMethod]
         public void Test_DeleteReservation()
         {
-            Assert.Inconclusive("Test not implemented.");
+            ReservationDto res = Target.GetReservation(1);
+            Target.DeleteReservation(res);
+
+            Assert.IsNull(Target.GetReservation(1));
         }
     }
 }

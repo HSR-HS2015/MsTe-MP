@@ -29,7 +29,7 @@ namespace AutoReservation.BusinessLayer
             return context.Autos.AsNoTracking().SingleOrDefault(a => a.Id == id);
         }
 
-        public void UupdateAuto(Auto original, Auto modified)
+        public void UpdateAuto(Auto original, Auto modified)
         {
             context.Autos.Attach(original);
             context.Entry(original).CurrentValues.SetValues(modified);
@@ -113,7 +113,7 @@ namespace AutoReservation.BusinessLayer
             Reservation
         */
 
-        public IList<Reservation> Reservationen()
+        public IList<Reservation> GetReservationen()
         {
             return context.Reservationen.AsNoTracking().ToList();
         }
