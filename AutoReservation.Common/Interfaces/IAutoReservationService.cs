@@ -34,6 +34,7 @@ namespace AutoReservation.Common.Interfaces
 
         */
 
+
         [OperationContract]
         IList<AutoDto> Autos();
 

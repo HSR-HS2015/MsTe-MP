@@ -13,7 +13,7 @@ namespace AutoReservation.Ui.ViewModels
     public class AutoViewModel : ViewModelBase
     {
         private readonly List<AutoDto> autosOriginal = new List<AutoDto>();
-        private readonly ObservableCollection<AutoDto> autos = new ObservableCollection<AutoDto>();
+        private ObservableCollection<AutoDto> autos = new ObservableCollection<AutoDto>();
 
         public AutoViewModel(IServiceFactory factory) : base(factory)
         {
@@ -22,7 +22,14 @@ namespace AutoReservation.Ui.ViewModels
 
         public ObservableCollection<AutoDto> Autos
         {
-            get { return autos; }
+            get
+            {
+                if (autos == null)
+                {
+                    autos = new ObservableCollection<AutoDto>();
+                }
+                return autos;
+            }
         }
 
         private AutoDto selectedAuto;
@@ -56,6 +63,7 @@ namespace AutoReservation.Ui.ViewModels
         {
             Autos.Clear();
             autosOriginal.Clear();
+            if(Service.Autos() != null)
             foreach (var auto in Service.Autos())
             {
                 Autos.Add(auto);
