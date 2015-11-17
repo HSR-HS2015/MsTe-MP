@@ -7,6 +7,7 @@ using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Common.Extensions;
 using AutoReservation.Ui.Factory;
 using Ninject;
+using System;
 
 namespace AutoReservation.Ui.ViewModels
 {
@@ -130,7 +131,11 @@ namespace AutoReservation.Ui.ViewModels
 
         private void New()
         {
-            Kunden.Add(new KundeDto());
+            Kunden.Add(new KundeDto
+                {
+                Geburtsdatum = new DateTime(1920,12,12)
+                }
+        );
         }
 
         private bool CanNew()
